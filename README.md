@@ -1,6 +1,7 @@
 # Facial Recognition Attendance System
 Project for Software Engineering CSC 0313.
 
+Some Terminologies
 > Facial Detection - The ability of the program to 'detect' faces.
 
 > Facial Recognition - The ability of the program to 'identify' whose faces are shown.
