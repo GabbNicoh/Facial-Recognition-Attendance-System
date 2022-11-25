@@ -11,9 +11,7 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 [![Documentation Status](https://readthedocs.org/projects/face-recognition/badge/?version=latest)](http://face-recognition.readthedocs.io/en/latest/?badge=latest)
 
 ## Similar Studies
-[Geitgey, Adam (2016)](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78)
-
-[![Github Link](https://www.svgrepo.com/show/360450/github.svg)](https://github.com/ageitgey/face_recognition)
+[Geitgey, Adam (2016)](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78) [![Github Link](https://www.svgrepo.com/show/360450/github.svg)](https://github.com/ageitgey/face_recognition)
 
 `Add description and how they did Facial Detection and Recognition`
 
