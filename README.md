@@ -26,14 +26,12 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 ### I know python
 - [Youtube (2022)](https://www.youtube.com/watch?v=A6464U4bPPQ)
 
-## Installation
-### Requirements
-- Python 3.3+
 
 ## Goals
 - [ ] Facial Detection & Recognition System
 - [ ] Train AI to be accurate? (not sure if modules are allowed)
 - [ ] Publish time, date and name of student on to an excel file 
+- [ ] Logs
 
 ### Additionals
 - Add delay for 30 minutes every recognized students
@@ -46,3 +44,27 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 - Tilted Head
 - Low Brightness
 - With Face Mask
+
+## Installation
+### Requirements
+- Python 3.3+
+> pip install opencv-python
+> pip install face_recognition
+>     Error on installation needs CMake and Dlib
+>     pip install CMake
+>     need C and C++ compilers to install Dlib (We can use Visual Studio 2019)
+
+## Classifer & Algorithm
+
+
+
+## Steps
+- Encode
+- Detect
+- Compare Faces
+- Log
+
+## Tips
+- Store encodings in xml file to save encoding time
+- Pass image as gray scale and small size by using opencv
+- Run on separate thread
