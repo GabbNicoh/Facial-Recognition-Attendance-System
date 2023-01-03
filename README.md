@@ -54,6 +54,9 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 >     pip install CMake
 >     need C and C++ compilers to install Dlib (We can use Visual Studio 2019)
 
+- Database MySQL Driver
+> pip install mysql-connector-python
+
 ## Classifer & Algorithm
 
 
