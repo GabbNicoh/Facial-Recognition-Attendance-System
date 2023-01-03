@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import face_recognition
 import os
-from datetime import datetime
 
 images = []
 classNames = []
@@ -19,7 +18,7 @@ print(classNames)
 def findEncodings(images):
     encodeList = []
     for img in images:
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # change to gray
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         encode = face_recognition.face_encodings(img)[0]
         encodeList.append(encode)
     return encodeList
@@ -34,6 +33,7 @@ if not cap.isOpened():
 
 while True:
     success, img = cap.read()
+    
     if process_current_frame:
         imgS = cv2.resize(img, (0, 0), None, 0.25, 0.25)
         imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB) # change to gray
@@ -60,10 +60,7 @@ while True:
     # display results
     for (top, right, bottom, left), name in zip(facesCurFrame, detected_faces):
         # scale face locations
-        top *= 4
-        right *= 4
-        bottom *= 4
-        left *= 4
+        top,right,bottom,left = top * 4, right * 4, bottom * 4, left * 4
 
         # create a frame with name
         cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
@@ -77,14 +74,3 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-
-
-
-
-
-
-# y1, x2, y2, x1 = faceLoc
-# y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
-# cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
-# cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
-# cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
