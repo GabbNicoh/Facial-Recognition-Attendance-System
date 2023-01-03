@@ -4,7 +4,8 @@ import face_recognition
 import os
 
 images = []
-classNames = []
+stdNames = []
+encodeListKnown = []
 path = 'image'
 myList = os.listdir(path)
 process_current_frame = True
@@ -12,10 +13,9 @@ process_current_frame = True
 for cl in myList:
     curImg = cv2.imread(f'{path}/{cl}')
     images.append(curImg)
-    classNames.append(os.path.splitext(cl)[0])
-print(classNames)
+    stdNames.append(os.path.splitext(cl)[0])
+print(stdNames)
 
-encodeListKnown = []
 def findEncodings():
     for image in os.listdir('image'):
         face_image = face_recognition.load_image_file(f"image/{image}")
@@ -36,11 +36,11 @@ while True:
     
     if process_current_frame:
         imgS = cv2.resize(img, (0, 0), fx= 0.25, fy=0.25)
-        imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB) # change to gray
-
+        rgb_imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB) # TODO: change to gray to reduce lag
+        
         # find all the faces and face encodings in current frame of video
-        facesCurFrame = face_recognition.face_locations(imgS)
-        encodesCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
+        facesCurFrame = face_recognition.face_locations(rgb_imgS) 
+        encodesCurFrame = face_recognition.face_encodings(rgb_imgS, facesCurFrame) # TODO: this is what causes lag
 
         detected_faces = []
         for encodeFace in encodesCurFrame:
@@ -51,9 +51,10 @@ while True:
             # Calculate shortest distance from face
             faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
 
+            # checks if face are a match
             matchIndex = np.argmin(faceDis)
             if matches[matchIndex]:
-                name = classNames[matchIndex]
+                name = stdNames[matchIndex]
             detected_faces.append(f'{name}')
 
     process_current_frame = not process_current_frame
@@ -64,8 +65,14 @@ while True:
         top,right,bottom,left = top * 4, right * 4, bottom * 4, left * 4
 
         # create a frame with name
-        cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 2)
-        cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
+        if name is not 'Unknown':
+            cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 2)
+            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
+
+        else:
+            cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
+            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+
         cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255, 255), 1)
 
     cv2.imshow('Webcam', img)
