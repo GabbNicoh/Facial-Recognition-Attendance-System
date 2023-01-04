@@ -26,7 +26,6 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 ### I know python
 - [Youtube (2022)](https://www.youtube.com/watch?v=A6464U4bPPQ)
 
-
 ## Goals
 - [ ] Facial Detection & Recognition System
 - [ ] Train AI to be accurate? (not sure if modules are allowed)
@@ -47,19 +46,29 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 
 ## Installation
 ### Requirements
-- Python 3.3+
-> pip install opencv-python
+- Python 3.x+ (3.7)
+> pip install cmake
+>     if error need C and C++ compilers to install Dlib (We can use Visual Studio 2019)
 > pip install dlib==19.22
+> pip install opencv-python
 > pip install face_recognition
->     pip install CMake if error
->     need C and C++ compilers to install Dlib (We can use Visual Studio 2019)
 
 - Database MySQL Driver
 > pip install mysql-connector-python
 
+- Web
+> pip install flask
+> pip install flask-login
+> pip install flask-sqlalchemy
+
 ## Classifer & Algorithm
-
-
+https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78
+https://face-recognition.readthedocs.io/en/latest/usage.html
+https://github.com/indently/webcam_face_recognition/blob/master/recognition.py
+https://www.youtube.com/watch?v=tl2eEBFEHqM
+https://www.youtube.com/watch?v=sz25xxF_AVE
+https://www.youtube.com/watch?v=QSTnwsZj2yc
+https://youtu.be/dam0GPOAvVI (FLASK)
 
 ## Steps
 - Encode
@@ -71,3 +80,10 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 - Store encodings in xml file to save encoding time
 - Pass image as gray scale and small size by using opencv
 - Run on separate thread
+- ADD PROGRESS BAR
+- FLASK for WEB FRAMEWORK
+  - Initialize
+  - Routes
+  - Jinja Templating Language & HTML Templates
+  - Bootstrap (CSS framework)
+  - 
