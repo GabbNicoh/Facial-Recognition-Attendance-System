@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import face_recognition
 import os
+from datetime import datetime
 
 stdNames = []
 encodeStdKnown = []
@@ -18,6 +19,18 @@ def findEncodings():
         face_image = face_recognition.load_image_file(f"image/{image}") # TODO Make string only get before comma (,) (BARRIOS, Gabriel Nicoh)
         face_encoding = face_recognition.face_encodings(face_image)[0]
         encodeStdKnown.append(face_encoding)
+
+def MarkAttendance(name):
+    with open('attendance.csv', 'r+') as f:
+        myDataList = f.readlines()
+        nameList = []
+        for line in myDataList:
+            entry = line.split(',')
+            nameList.append(entry[0])
+        if name not in nameList:
+            now = datetime.now()
+            dtString = now.strftime('%H:%M')
+            f.writelines(f'\n{name},{dtString}')
 
 findEncodings()
 print('Encoding Complete')
@@ -53,6 +66,7 @@ while True:
             if matches[isMatch]:
                 name = stdNames[isMatch]
                 # TODO add logs here
+            MarkAttendance(name)
             detected_faces.append(f'{name}')
 
     current_frame = not current_frame

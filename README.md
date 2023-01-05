@@ -69,6 +69,7 @@ https://www.youtube.com/watch?v=tl2eEBFEHqM
 https://www.youtube.com/watch?v=sz25xxF_AVE
 https://www.youtube.com/watch?v=QSTnwsZj2yc
 https://youtu.be/dam0GPOAvVI (FLASK)
+https://youtu.be/iM3kjbbKHQU (TKINTER)
 
 ## Steps
 - Encode
@@ -85,5 +86,5 @@ https://youtu.be/dam0GPOAvVI (FLASK)
   - Initialize
   - Routes
   - Jinja Templating Language & HTML Templates
-  - Bootstrap (CSS framework)
+  - Bootstrap (CSS framework) (TKinter for GUI)
   - 
