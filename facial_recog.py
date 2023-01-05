@@ -20,7 +20,7 @@ def findEncodings():
         face_encoding = face_recognition.face_encodings(face_image)[0]
         encodeStdKnown.append(face_encoding)
 
-def MarkAttendance(name):
+def Attendance(name):
     with open('attendance.csv', 'r+') as f:
         myDataList = f.readlines()
         nameList = []
@@ -65,8 +65,8 @@ while True:
             isMatch = np.argmin(faceDis)
             if matches[isMatch]:
                 name = stdNames[isMatch]
-                # TODO add logs here
-            MarkAttendance(name)
+            # TODO add logs here
+            Attendance(name)
             detected_faces.append(f'{name}')
 
     current_frame = not current_frame
