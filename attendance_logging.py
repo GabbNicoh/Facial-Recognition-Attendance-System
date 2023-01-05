@@ -20,14 +20,17 @@ def Attendance(name):
 # Attendance('Test')
 
 logStatus = {}
+nameList = []
 def Logging(name):
     with open('logging.csv', 'r+') as f:
+        print(f'INITIAL: {logStatus}')
         myDataList = f.readlines()
-        nameList = []
         status = ''
         for line in myDataList:
-            entry = line.split(',')
+            entry = line.rstrip('\n').split(',')
+            print(f'ENTRY: {entry}')
             nameList.append(entry[0])
+            logStatus[entry[0]] = entry[2] # TODO TURN THIS INTO LAST IN FIRST OUT
             
         if name not in nameList:
             now = datetime.now()
@@ -42,11 +45,15 @@ def Logging(name):
                 time = now.strftime('%H:%M:%S')
                 status = 'OUT'
                 logStatus[name] = status
-                nameList.remove(name)
+                f.writelines(f'\n{name},{time},{status}')
+            elif logStatus[name] == 'OUT':
+                now = datetime.now()
+                time = now.strftime('%H:%M:%S')
+                status = 'IN'
+                logStatus[name] = status
                 f.writelines(f'\n{name},{time},{status}')
 
-        print(f'DICTIONARY: {logStatus}')
-        print(f'Namelist: {nameList}')
+        print(f'OUTPUT: {logStatus}')
             
 Logging('YourMom')
 
@@ -54,4 +61,4 @@ event = threading.Event()
 event.wait(3)
 
 Logging('JackDaniaels')
-Logging('YourMom')
+# TODO: ERROR WHEN RELOADING NOT SAVING PREVIOUS DICTIONARY
