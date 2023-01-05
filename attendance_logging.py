@@ -30,7 +30,7 @@ def Logging(name):
             entry = line.rstrip('\n').split(',')
             print(f'ENTRY: {entry}')
             nameList.append(entry[0])
-            logStatus[entry[0]] = entry[2] # TODO TURN THIS INTO LAST IN FIRST OUT
+            logStatus[entry[0]] = entry[2]
             
         if name not in nameList:
             now = datetime.now()
@@ -54,11 +54,10 @@ def Logging(name):
                 f.writelines(f'\n{name},{time},{status}')
 
         print(f'OUTPUT: {logStatus}')
-            
+
 Logging('YourMom')
 
 event = threading.Event()
 event.wait(3)
 
 Logging('JackDaniaels')
-# TODO: ERROR WHEN RELOADING NOT SAVING PREVIOUS DICTIONARY
