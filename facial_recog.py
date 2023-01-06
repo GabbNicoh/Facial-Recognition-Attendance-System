@@ -128,17 +128,18 @@ while True:
         left *= 4
         b,g,r = 0,0,0
         msgText = ''
+
         # create a frame with name
         if found:
             b,g,r=0,255,0 # green
             msgText = name
         elif name is not 'Unknown Student':
             b,g,r=255,0,0 # blue
-            msgText = 'Loading...'
+            msgText = 'Detecting...'
         else:
             b,g,r=0,0,255# red
             msgText = name
-            
+        
         cv2.rectangle(img, (left, top), (right, bottom), (b,g,r), 2)
         cv2.rectangle(img, (left, bottom - 35), (right, bottom), (b,g,r), cv2.FILLED)
         cv2.putText(img, msgText, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1, (255, 255, 255), 1)
