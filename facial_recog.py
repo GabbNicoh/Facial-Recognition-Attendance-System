@@ -110,12 +110,11 @@ while True:
                 name = stdNames[isMatch]
 
             timer += 1
-            # TODO make it so if it is done turn green
             if timer == 6:
                 Logging(name)
                 found = True
-
-            Attendance(name)
+                Attendance(name)
+            
             detected_faces.append(f'{name}')
 
     current_frame = not current_frame
@@ -128,7 +127,7 @@ while True:
         bottom *= 4
         left *= 4
         b,g,r = 0,0,0
-        
+
         # create a frame with name
         if found:
             b,g,r=0,255,0 # green
