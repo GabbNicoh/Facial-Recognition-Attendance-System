@@ -7,7 +7,6 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 
 - `Facial Recognition` - The ability of the program to 'identify' whose faces are shown.
 
-[![PyPI](https://img.shields.io/pypi/v/face_recognition.svg)](https://pypi.python.org/pypi/face_recognition)
 [![Documentation Status](https://readthedocs.org/projects/face-recognition/badge/?version=latest)](http://face-recognition.readthedocs.io/en/latest/?badge=latest)
 
 ## Similar Studies
@@ -33,11 +32,11 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 - [ ] Logs
 
 ### Additionals
-- Add delay for 30 minutes every recognized students
+- Add delay for 5 minutes every recognized students
 - How accurate is the system
--  UI for the facial recognition and menu 
--  Student Attendance Statistics
-   - Records a class' number of present, lates and absent
+- UI for the facial recognition and menu 
+- Student Attendance Statistics (DATABASE)
+  - Records a class' number of present, lates and absent
 
 ## Notes
 - Tilted Head
@@ -61,17 +60,27 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 
 - Web
 > pip install flask
+
 > pip install flask-login
+
 > pip install flask-sqlalchemy
 
 ## Classifer & Algorithm
-https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78
+https://medium.com/@ageitgey/
+machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78
+
 https://face-recognition.readthedocs.io/en/latest/usage.html
+
 https://github.com/indently/webcam_face_recognition/blob/master/recognition.py
+
 https://www.youtube.com/watch?v=tl2eEBFEHqM
+
 https://www.youtube.com/watch?v=sz25xxF_AVE
+
 https://www.youtube.com/watch?v=QSTnwsZj2yc
+
 https://youtu.be/dam0GPOAvVI (FLASK)
+
 https://youtu.be/iM3kjbbKHQU (TKINTER)
 
 ## Steps
