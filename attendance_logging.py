@@ -3,6 +3,7 @@ import threading
 
 # TODO: setup function to create a csv for attendance and log 
 # TODO: setup function to clear last entry only
+# BEFORE TRYING FLASK
 
 def Attendance(name):
     with open('attendance.csv', 'r+') as f:
