@@ -127,21 +127,18 @@ while True:
         right *= 4
         bottom *= 4
         left *= 4
-
+        b,g,r = 0,0,0
+        
         # create a frame with name
         if found:
-           # green
-            cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 2)
-            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
+            b,g,r=0,255,0 # green
         elif name is not 'Unknown Student':
-            # blue
-            cv2.rectangle(img, (left, top), (right, bottom), (255, 0, 0), 2) # draw box around face
-            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (255, 0, 0), cv2.FILLED) # draw label with name below
+            b,g,r=255,0,0 # blue
         else:
-             # red
-            cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
-            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-
+            b,g,r=0,0,255# red
+            
+        cv2.rectangle(img, (left, top), (right, bottom), (b,g,r), 2)
+        cv2.rectangle(img, (left, bottom - 35), (right, bottom), (b,g,r), cv2.FILLED)
         cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1, (255, 255, 255), 1)
 
     cv2.imshow('Webcam', img)
