@@ -66,8 +66,7 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 > pip install flask-sqlalchemy
 
 ## Classifer & Algorithm
-https://medium.com/@ageitgey/
-machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78
+https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78
 
 https://face-recognition.readthedocs.io/en/latest/usage.html
 
