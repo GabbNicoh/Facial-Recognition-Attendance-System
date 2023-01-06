@@ -113,3 +113,4 @@ Let’s review the steps we followed:
   - LOGIN, POST and GET request
     - handling information from one page to another
   - Message FlaSh
+  - DATABASE MODELS
