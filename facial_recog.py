@@ -23,12 +23,12 @@ def findEncodings():
 
 def Attendance(name):
     with open('attendance.csv', 'r+') as f:
+        AttendanceList = []
         myDataList = f.readlines()
-        nameList = []
         for line in myDataList:
             entry = line.split(',')
-            nameList.append(entry[0])
-        if name not in nameList:
+            AttendanceList.append(entry[0])
+        if name not in AttendanceList:
             now = datetime.now()
             dtString = now.strftime('%H:%M')
             f.writelines(f'\n{name},{dtString}')
@@ -127,18 +127,21 @@ while True:
         bottom *= 4
         left *= 4
         b,g,r = 0,0,0
-
+        msgText = ''
         # create a frame with name
         if found:
             b,g,r=0,255,0 # green
+            msgText = name
         elif name is not 'Unknown Student':
             b,g,r=255,0,0 # blue
+            msgText = 'Loading...'
         else:
             b,g,r=0,0,255# red
+            msgText = name
             
         cv2.rectangle(img, (left, top), (right, bottom), (b,g,r), 2)
         cv2.rectangle(img, (left, bottom - 35), (right, bottom), (b,g,r), cv2.FILLED)
-        cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1, (255, 255, 255), 1)
+        cv2.putText(img, msgText, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1, (255, 255, 255), 1)
 
     cv2.imshow('Webcam', img)
 
