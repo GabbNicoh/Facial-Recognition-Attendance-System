@@ -87,7 +87,7 @@ while True:
         rgb_imgS = imgS[:, :, ::-1]
 
         # find all the faces and face encodings in current frame of video
-        facesCurFrame = face_recognition.face_locations(rgb_imgS) # TODO TRY REINSTALLING DLIB WITH CUDA DRIVERS FOR THIS
+        facesCurFrame = face_recognition.face_locations(rgb_imgS)
         encodesCurFrame = face_recognition.face_encodings(rgb_imgS, facesCurFrame) # TODO this is what causes lag
         
         if not facesCurFrame: # if there are no faces restart the timer
@@ -109,9 +109,8 @@ while True:
 
             timer += 1
             # TODO make it so if it is done turn green
-            if timer >= 7:
+            if timer == 6:
                 Logging(name)
-                timer = 0
 
             Attendance(name)
             detected_faces.append(f'{name}')
