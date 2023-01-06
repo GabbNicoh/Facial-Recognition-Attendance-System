@@ -3,6 +3,7 @@ import threading
 
 # TODO: INCREMENT FACE TO REACH A PONIT IF POINT REACHED THEN LOG
 # TODO: add a clear last attendance entry if not the student
+# TODO: Saving to make rollback easy
 
 def Attendance(name):
     with open('attendance.csv', 'r+') as f:
