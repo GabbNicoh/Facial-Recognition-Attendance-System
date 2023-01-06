@@ -79,9 +79,10 @@ if not vid.isOpened():
     print('ERROR! No video source found...')
 
 timer = 0
+found = False
 while True:
     ret, img = vid.read()
-    
+
     if current_frame:
         imgS = cv2.resize(img, (0, 0), fx= 0.25, fy=0.25)
         rgb_imgS = imgS[:, :, ::-1]
@@ -89,9 +90,10 @@ while True:
         # find all the faces and face encodings in current frame of video
         facesCurFrame = face_recognition.face_locations(rgb_imgS)
         encodesCurFrame = face_recognition.face_encodings(rgb_imgS, facesCurFrame) # TODO this is what causes lag
-        
+
         if not facesCurFrame: # if there are no faces restart the timer
             timer = 0
+            found = False
 
         detected_faces = []
         for encodeFace in encodesCurFrame:
@@ -111,6 +113,7 @@ while True:
             # TODO make it so if it is done turn green
             if timer == 6:
                 Logging(name)
+                found = True
 
             Attendance(name)
             detected_faces.append(f'{name}')
@@ -126,17 +129,23 @@ while True:
         left *= 4
 
         # create a frame with name
-        if name is not 'Unknown Student':
-            cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 2) # draw box around face
-            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED) # draw label with name below
+        if found:
+           # green
+            cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 2)
+            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 255, 0), cv2.FILLED)
+        elif name is not 'Unknown Student':
+            # blue
+            cv2.rectangle(img, (left, top), (right, bottom), (255, 0, 0), 2) # draw box around face
+            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (255, 0, 0), cv2.FILLED) # draw label with name below
         else:
+             # red
             cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
             cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
 
         cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1, (255, 255, 255), 1)
 
     cv2.imshow('Webcam', img)
-    
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
