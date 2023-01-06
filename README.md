@@ -110,4 +110,6 @@ Let’s review the steps we followed:
   - Routes
   - Jinja Templating Language & HTML Templates
   - Bootstrap (CSS framework) (TKinter for GUI)
-  - 
+  - LOGIN, POST and GET request
+    - handling information from one page to another
+  - Message FlaSh
