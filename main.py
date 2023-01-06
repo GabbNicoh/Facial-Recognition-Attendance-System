@@ -1,6 +1,8 @@
-# import here
-import dlib
-print(dlib.DLIB_USE_CUDA)
+from website import create_app
+
+app = create_app()
 
 if __name__ == '__main__':
-    pass
+    app.run(debug=True)
+
+# flask module not found ctrl + shit + p > python select interpreter to version
