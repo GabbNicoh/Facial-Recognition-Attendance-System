@@ -108,7 +108,6 @@ while True:
                 name = stdNames[isMatch]
 
             timer += 1
-            print(f'TIMER: {timer}') 
             # TODO make it so if it is done turn green
             if timer >= 7:
                 Logging(name)

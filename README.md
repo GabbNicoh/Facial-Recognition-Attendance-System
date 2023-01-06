@@ -82,6 +82,18 @@ https://youtu.be/dam0GPOAvVI (FLASK)
 
 https://youtu.be/iM3kjbbKHQU (TKINTER)
 
+FACE DETECTION - Face Landmark Estimation, HOG Algorithm
+OpenFace trained the Model
+Encoding - Get 128 measurements of each face
+Find Face: Linear support vector machine classifier
+
+Running this Yourself
+Let’s review the steps we followed:
+1. Encode a picture using the HOG algorithm to create a simplified version of the image. Using this simplified image, find the part of the image that most looks like a generic HOG encoding of a face.
+2. Figure out the pose of the face by finding the main landmarks in the face. Once we find those landmarks, use them to warp the image so that the eyes and mouth are centered.
+3. Pass the centered face image through a neural network that knows how to measure features of the face. Save those 128 measurements.
+4. Looking at all the faces we’ve measured in the past, see which person has the closest measurements to our face’s measurements. That’s our match!
+
 ## Steps
 - Encode
 - Detect
