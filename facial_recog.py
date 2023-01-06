@@ -4,6 +4,7 @@ import face_recognition
 import os
 from datetime import datetime
 
+
 stdNames = []
 encodeStdKnown = []
 path = 'image'
@@ -32,6 +33,42 @@ def Attendance(name):
             dtString = now.strftime('%H:%M')
             f.writelines(f'\n{name},{dtString}')
 
+logStatus = {}
+nameList = []
+def Logging(name):
+    with open('logging.csv', 'r+') as f:
+        # print(f'INITIAL: {logStatus}')
+        myDataList = f.readlines()
+        status = ''
+        for line in myDataList:
+            entry = line.rstrip('\n').split(',')
+            # print(f'ENTRY: {entry}')
+            nameList.append(entry[0])
+            logStatus[entry[0]] = entry[2]
+            
+        if name not in nameList:
+            now = datetime.now()
+            time = now.strftime('%H:%M:%S')
+            status = 'IN'
+            logStatus[name] = status
+            f.writelines(f'\n{name},{time},{status}')
+        
+        if name in nameList:
+            if logStatus[name] == 'IN': 
+                now = datetime.now()
+                time = now.strftime('%H:%M:%S')
+                status = 'OUT'
+                logStatus[name] = status
+                f.writelines(f'\n{name},{time},{status}')
+            elif logStatus[name] == 'OUT':
+                now = datetime.now()
+                time = now.strftime('%H:%M:%S')
+                status = 'IN'
+                logStatus[name] = status
+                f.writelines(f'\n{name},{time},{status}')
+
+        # print(f'OUTPUT: {logStatus}')
+
 findEncodings()
 print('Encoding Complete')
 
@@ -41,6 +78,7 @@ vid = cv2.VideoCapture(0)
 if not vid.isOpened():
     print('ERROR! No video source found...')
 
+timer = 0
 while True:
     ret, img = vid.read()
     
@@ -51,6 +89,9 @@ while True:
         # find all the faces and face encodings in current frame of video
         facesCurFrame = face_recognition.face_locations(rgb_imgS) # TODO TRY REINSTALLING DLIB WITH CUDA DRIVERS FOR THIS
         encodesCurFrame = face_recognition.face_encodings(rgb_imgS, facesCurFrame) # TODO this is what causes lag
+        
+        if not facesCurFrame: # if there are no faces restart the timer
+            timer = 0
 
         detected_faces = []
         for encodeFace in encodesCurFrame:
@@ -65,7 +106,14 @@ while True:
             isMatch = np.argmin(faceDis)
             if matches[isMatch]:
                 name = stdNames[isMatch]
-            # TODO add logs here
+
+            timer += 1
+            print(f'TIMER: {timer}') 
+            # TODO make it so if it is done turn green
+            if timer >= 7:
+                Logging(name)
+                timer = 0
+
             Attendance(name)
             detected_faces.append(f'{name}')
 
@@ -73,7 +121,6 @@ while True:
 
     # display results
     for (top, right, bottom, left), name in zip(facesCurFrame, detected_faces):
-        
         # scale face locations 5 because we shrunk the image to 1/5, 4 1/4
         top *= 4
         right *= 4
