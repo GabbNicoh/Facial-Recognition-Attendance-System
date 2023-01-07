@@ -163,3 +163,12 @@ def video_feed():
 
 if __name__=='__main__':
     recog.run(debug=True)
+
+
+# cv2.imshow('Webcam', img)
+
+# if cv2.waitKey(1) & 0xFF == ord('q'):
+#     break
+
+# vid.release()
+# cv2.destroyAllWindows()
