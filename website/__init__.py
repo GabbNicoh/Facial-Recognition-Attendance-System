@@ -15,10 +15,12 @@ def create_app():
     # register views to run here
     from .views import views
     from .auth import auth
+    from .recog import recog
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-
+    app.register_blueprint(recog, url_prefix='/')
+    
     # check if database is made
     from .models import User
 

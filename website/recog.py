@@ -3,9 +3,10 @@ import numpy as np
 import face_recognition
 import os
 from datetime import datetime
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, Blueprint
 
-app = Flask(__name__)
+# app = Flask(__name__)
+recog = Blueprint('recog', __name__)
 
 stdNames = []
 encodeStdKnown = []
@@ -152,13 +153,13 @@ def main_face_recog():
         img = buffer.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n')
 
-@app.route('/index')
+@recog.route('/face-recog')
 def index():
-    return render_template('index.html')
+    return render_template('face-recog.html')
 
-@app.route('/video_feed')
+@recog.route('/video_feed')
 def video_feed():
     return Response(main_face_recog(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__=='__main__':
-    app.run(debug=True)
+    recog.run(debug=True)
