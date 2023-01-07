@@ -26,14 +26,14 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 - [Youtube (2022)](https://www.youtube.com/watch?v=A6464U4bPPQ)
 
 ## Goals
-- [ ] Facial Detection & Recognition System
+- [x] Facial Detection & Recognition System
 - [ ] Train AI to be accurate? (not sure if modules are allowed)
-- [ ] Publish time, date and name of student on to an excel file 
-- [ ] Logs
+- [x] Publish time, date and name of student on to an csv file 
+- [x] Logs
 
 ### Additionals
-- Add delay for 5 minutes every recognized students
-- How accurate is the system
+- Add delay for 5 minutes every recognized students (7 seconds)
+- How accurate is the system (0.6 tolerance)
 - UI for the facial recognition and menu 
 - Student Attendance Statistics (DATABASE)
   - Records a class' number of present, lates and absent
@@ -104,10 +104,12 @@ Let’s review the steps we followed:
 - Store encodings in xml file to save encoding time
 - Pass image as gray scale and small size by using opencv
 - Run on separate thread
-- ADD PROGRESS BAR
 - FLASK for WEB FRAMEWORK
   - Initialize
   - Routes
   - Jinja Templating Language & HTML Templates
   - Bootstrap (CSS framework) (TKinter for GUI)
-  - 
+  - LOGIN, POST and GET request
+    - handling information from one page to another
+  - Message FlaSh
+  - DATABASE MODELS
