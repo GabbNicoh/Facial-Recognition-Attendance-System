@@ -147,14 +147,13 @@ def main_face_recog():
             cv2.rectangle(img, (left, bottom - 35), (right, bottom), (b,g,r), cv2.FILLED)
             cv2.putText(img, msgText, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 1, (255, 255, 255), 1)
 
-
         ret, buffer = cv2.imencode('.jpg', img)
         img = buffer.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n')
 
-@app.route('/index')
+@app.route('/face-recog')
 def index():
-    return render_template('index.html')
+    return render_template('face_recog.html')
 
 @app.route('/video_feed')
 def video_feed():
