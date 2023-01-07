@@ -114,7 +114,7 @@ def main_face_recog():
                     name = stdNames[isMatch]
 
                 timer += 1
-                if timer == 6:
+                if timer == 6: # if lasts for 6 seconds log
                     Logging(name)
                     found = True
                     Attendance(name)
