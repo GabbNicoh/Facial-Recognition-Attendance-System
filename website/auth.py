@@ -14,10 +14,10 @@ def login():
         id_num = request.form.get('id_num')
         password = request.form.get('password')
 
-        user = User.query.filter_by(id_num = id_num).first()
+        user = User.query.filter_by(id_num=id_num).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfull!', category='success')
+                flash('Logged in successful!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
