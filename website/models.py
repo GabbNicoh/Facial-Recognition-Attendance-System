@@ -11,15 +11,15 @@ class User(db.Model, UserMixin):
 class AttendanceSubject(db.Model):
     __tablename__ = 'AttendanceSubject'
     id = db.Column(db.Integer, primary_key=True)
-    atdc_name = db.Column(db.Integer, unique=True)
-    atdc_date = db.Column(db.DateTime(timezone=True), default=func.now)
+    atdc_name = db.Column(db.String(150), unique=True)
+    atdc_date = db.Column(db.String(150))
     atdc_record = db.relationship('AttendanceRecord')
 
 class LogSubject(db.Model):
     __tablename__ = 'LogSubject'
     id = db.Column(db.Integer, primary_key=True)
     log_name = db.Column(db.String(150))
-    log_time = db.Column(db.DateTime(timezone=True), default=func.now)
+    log_time = db.Column(db.String(150))
     log_status = db.Column(db.String(150))
     log_record = db.relationship('LogRecord')
 
