@@ -29,11 +29,11 @@ def Attendance(name):
         myDataList = f.readlines()
         for line in myDataList:
             entry = line.split(',')
-            AttendanceList.append(entry[0])
+            AttendanceList.append(entry[1])
         if name not in AttendanceList:
             now = datetime.now()
             dtString = now.strftime('%H:%M')
-            f.writelines(f'\n{name},{dtString}')
+            f.writelines(f'\n{len(AttendanceList)},{name},{dtString}')
 
 logStatus = {}
 nameList = []
@@ -45,15 +45,15 @@ def Logging(name):
         for line in myDataList:
             entry = line.rstrip('\n').split(',')
             # print(f'ENTRY: {entry}')
-            nameList.append(entry[0])
-            logStatus[entry[0]] = entry[2]
+            nameList.append(entry[1])
+            logStatus[entry[1]] = entry[3]
             
         if name not in nameList:
             now = datetime.now()
             time = now.strftime('%H:%M:%S')
             status = 'IN'
             logStatus[name] = status
-            f.writelines(f'\n{name},{time},{status}')
+            f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
         
         if name in nameList:
             if logStatus[name] == 'IN': 
@@ -61,13 +61,13 @@ def Logging(name):
                 time = now.strftime('%H:%M:%S')
                 status = 'OUT'
                 logStatus[name] = status
-                f.writelines(f'\n{name},{time},{status}')
+                f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
             elif logStatus[name] == 'OUT':
                 now = datetime.now()
                 time = now.strftime('%H:%M:%S')
                 status = 'IN'
                 logStatus[name] = status
-                f.writelines(f'\n{name},{time},{status}')
+                f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
 
         # print(f'OUTPUT: {logStatus}')
 
