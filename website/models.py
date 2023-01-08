@@ -20,7 +20,7 @@ class Log_Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     log_name = db.Column(db.String(150))
     log_time = db.Column(db.DateTime(timezone=True), default=func.now)
-    log_status = db.Column(db.Stringg(150))
+    log_status = db.Column(db.String(150))
     attdc_record = db.relationship('logrecord')
 
 class AttendanceRecord(db.Model):
@@ -32,11 +32,11 @@ class AttendanceRecord(db.Model):
 class Log_Record(db.Model):
     __tablename__ = 'logrecord'
     id = db.Column(db.Integer, primary_key=True)
-    log_id = db.Column(db.Integer, db.ForeignKey('Attendance_Subject.id'))
+    log_id = db.Column(db.Integer, db.ForeignKey('logsubject.id'))
     subjects = db.relationship('subjects')
     
 class Subjects(db.Model):
     __tablename__ = 'subjects'
     id = db.Column(db.Integer, primary_key=True)
-    atdc_id = db.Column()
-    log_id = db.Column()
+    atdc_id = db.Column(db.Integer, db.ForeignKey('attendancerecord.id'))
+    log_id = db.Column(db.Integer, db.ForeignKey('logrecord.id'))
