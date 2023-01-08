@@ -71,6 +71,9 @@ def Logging(name):
                 logStatus[name] = status
                 f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
 
+        # print(f'OUTPUT: {logStatus}')
+
+
 findEncodings()
 print('Encoding Complete')
 
