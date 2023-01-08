@@ -116,8 +116,8 @@ def main_face_recog():
                 timer += 1
                 if timer == 6: # if lasts for 6 seconds log
                     Logging(name)
-                    found = True
                     Attendance(name)
+                    found = True
                 
                 detected_faces.append(f'{name}')
 
