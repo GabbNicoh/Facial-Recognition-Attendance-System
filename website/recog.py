@@ -4,6 +4,8 @@ import face_recognition
 import os
 from datetime import datetime
 from flask import Flask, render_template, Response, Blueprint
+import csv
+import mysql.connector
 
 # app = Flask(__name__)
 recog = Blueprint('recog', __name__)
@@ -24,52 +26,50 @@ def findEncodings():
         encodeStdKnown.append(face_encoding)
 
 def Attendance(name):
-    with open('attendance.csv', 'r+') as f:
+    with open('website/attendance.csv', 'r+') as f:
         AttendanceList = []
         myDataList = f.readlines()
         for line in myDataList:
             entry = line.split(',')
-            AttendanceList.append(entry[0])
+            AttendanceList.append(entry[1])
         if name not in AttendanceList:
             now = datetime.now()
             dtString = now.strftime('%H:%M')
-            f.writelines(f'\n{name},{dtString}')
+            f.writelines(f'\n{len(AttendanceList)},{name},{dtString}')
 
 logStatus = {}
 nameList = []
 def Logging(name):
-    with open('logging.csv', 'r+') as f:
+    with open('website/logging.csv', 'r+') as f:
         # print(f'INITIAL: {logStatus}')
         myDataList = f.readlines()
         status = ''
         for line in myDataList:
             entry = line.rstrip('\n').split(',')
             # print(f'ENTRY: {entry}')
-            nameList.append(entry[0])
-            logStatus[entry[0]] = entry[2]
-            
+            nameList.append(entry[1])
+            logStatus[entry[1]] = entry[3]
+
         if name not in nameList:
             now = datetime.now()
             time = now.strftime('%H:%M:%S')
             status = 'IN'
             logStatus[name] = status
-            f.writelines(f'\n{name},{time},{status}')
-        
+            f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
+
         if name in nameList:
-            if logStatus[name] == 'IN': 
+            if logStatus[name] == 'IN':
                 now = datetime.now()
                 time = now.strftime('%H:%M:%S')
                 status = 'OUT'
                 logStatus[name] = status
-                f.writelines(f'\n{name},{time},{status}')
+                f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
             elif logStatus[name] == 'OUT':
                 now = datetime.now()
                 time = now.strftime('%H:%M:%S')
                 status = 'IN'
                 logStatus[name] = status
-                f.writelines(f'\n{name},{time},{status}')
-
-        # print(f'OUTPUT: {logStatus}')
+                f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
 
 findEncodings()
 print('Encoding Complete')
@@ -160,6 +160,30 @@ def index():
 @recog.route('/video_feed')
 def video_feed():
     return Response(main_face_recog(), mimetype='multipart/x-mixed-replace; boundary=frame')
+@recog.route('/view')
+def csv_database():
+    mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+    print('database connected')
+    cursor = mydb.cursor()
+    csv_data = csv.reader(open('website/attendance.csv'))
+    next(csv_data)
+    for row in csv_data:
+        cursor.execute('INSERT INTO attendancesubject (id,atdc_name,atdc_date) VALUES(%s,%s,%s)', row)
+        print(row)
+
+    mydb.commit()
+    cursor.close()
+
+    cursor = mydb.cursor()
+    csv_data = csv.reader(open('website/logging.csv'))
+    next(csv_data)
+    for row in csv_data:
+        cursor.execute('INSERT INTO logsubject (id,log_name,log_time,log_status) VALUES(%s,%s,%s,%s)', row)
+        print(row)
+
+    mydb.commit()
+    cursor.close()
+    return render_template('view.html')
 
 if __name__=='__main__':
     recog.run(debug=True)

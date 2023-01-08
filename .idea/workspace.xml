@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1dd01f8-4f06-4d27-a71b-1cbd00decb2f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/website/transfer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/templates/view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/attendance.csv" beforeDir="false" afterPath="$PROJECT_DIR$/website/attendance.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logging.csv" beforeDir="false" afterPath="$PROJECT_DIR$/website/logging.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/attendance.csv" beforeDir="false" afterPath="$PROJECT_DIR$/website/attendance.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/logging.csv" beforeDir="false" afterPath="$PROJECT_DIR$/website/logging.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/recog.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/recog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/transfer.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/transfer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -32,12 +34,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\GitHub\SoftEng Project\Facial-Recognition-Attendance-System\website" />
