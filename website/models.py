@@ -32,7 +32,6 @@ class Log_Record(db.Model):
     log_id = db.Column(db.Integer, db.ForeignKey('Attendance_Subject.id'))
     subjects = db.relationship('Subjects')
     
-
 class Subjects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     atdc_id = db.Column()
