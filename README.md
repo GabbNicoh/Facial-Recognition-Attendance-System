@@ -122,4 +122,8 @@ Let’s review the steps we followed:
 - [ ] connect csv to html to database
 
 ## UI
+### Prerequisites
+- Install fonts
+
+### TODO
 - [ ] make responsive
