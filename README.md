@@ -118,6 +118,8 @@ Let’s review the steps we followed:
 
 
 ## DATABASE
-- connect csv to database
-- python to database
-- print databasw on html
+- [ ] print from database to html
+- [ ] connect csv to html to database
+
+## UI
+- [ ] make responsive
