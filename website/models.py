@@ -8,31 +8,35 @@ class User(db.Model, UserMixin):
     id_num = db.Column(db.Integer, unique=True)
     password = db.Column(db.String(150))
 
-class Attendance_Subject(db.Model):
+class AttendanceSubject(db.Model):
+    __tablename__ = 'attendancesubject'
     id = db.Column(db.Integer, primary_key=True)
     atdc_name = db.Column(db.Integer, unique=True)
     atdc_date = db.Column(db.DateTime(timezone=True), default=func.now)
-    attdc_record = db.relationship('Attendance_Record')
+    atdcrecord = db.relationship('attendancerecord')
 
 class Log_Subject(db.Model):
+    __tablename__ = 'logsubject'
     id = db.Column(db.Integer, primary_key=True)
     log_name = db.Column(db.String(150))
     log_time = db.Column(db.DateTime(timezone=True), default=func.now)
     log_status = db.Column(db.Stringg(150))
-    attdc_record = db.relationship('Log_Record')
+    attdc_record = db.relationship('logrecord')
 
-class Attendance_Record(db.Model):
+class AttendanceRecord(db.Model):
+    __tablename__ = 'attendancerecord'
     id = db.Column(db.Integer, primary_key=True)
-    atdc_id = db.Column(db.Integer, db.ForeignKey('Attendance_Subject.id'))
-    subjects = db.relationship('Subjects')
-    # subject_id = db.Column(db.String(40), db.ForeignKey())
+    atdc_id = db.Column(db.Integer, db.ForeignKey('attendancesubject.id'))
+    subjects = db.relationship('subjects')
 
 class Log_Record(db.Model):
+    __tablename__ = 'logrecord'
     id = db.Column(db.Integer, primary_key=True)
     log_id = db.Column(db.Integer, db.ForeignKey('Attendance_Subject.id'))
-    subjects = db.relationship('Subjects')
+    subjects = db.relationship('subjects')
     
 class Subjects(db.Model):
+    __tablename__ = 'subjects'
     id = db.Column(db.Integer, primary_key=True)
     atdc_id = db.Column()
     log_id = db.Column()

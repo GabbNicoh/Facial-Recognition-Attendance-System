@@ -23,7 +23,7 @@ def create_app():
     app.register_blueprint(recog, url_prefix='/')
     
     # check if database is made
-    from .models import User
+    from .models import User, AttendanceRecord, AttendanceSubject
 
     create_database(app)
 
