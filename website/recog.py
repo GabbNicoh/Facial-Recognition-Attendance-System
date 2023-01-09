@@ -3,7 +3,7 @@ import numpy as np
 import face_recognition
 import os
 from datetime import datetime
-from flask import Flask, render_template, Response, Blueprint, request
+from flask import Flask, render_template, Response, Blueprint, request, send_file
 import csv
 import mysql.connector
 import pandas as pd
@@ -246,6 +246,13 @@ def db():
         return render_template("shows.html", data=output)
     else:
         return render_template("shows.html")
+
+@recog.route('/download')
+def download_csv():
+    attdnc = 'website/attendance.csv'
+    lgg = 'website/logging.csv'
+    
+    return send_file(lgg, attdnc, as_attachment=True)
 
 if __name__=='__main__':
     recog.run(debug=True)
