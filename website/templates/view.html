@@ -215,7 +215,20 @@
 			<a href="#">Subject 3</a>
 		</div>
 	</div>
-	<div class="attendance"></div>
-	<div class="logs"></div>
+
+	<form method="POST">
+		<input type="submit" value="show data">
+	</form>
+	<div class="attendance">
+		{% for key, value in data.items() %}
+			<p>{{i}}</p>
+		{% endfor %}
+
+	</div>
+	<div class="logs">
+		{% for key, value in data.items() %}
+			<p>{{i}}</p>
+		{% endfor %}
+	</div>
 </body>
 </html>

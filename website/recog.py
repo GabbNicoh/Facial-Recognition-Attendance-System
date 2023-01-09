@@ -193,7 +193,7 @@ def csv_database_attendance():
     mydb.commit()
     cursor.close()
 
-@recog.route('/view')
+@recog.route('/view', methods = ["POST", "GET"])
 def csv_database_log():
     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
     print('database connected')
@@ -209,7 +209,15 @@ def csv_database_log():
     cursor.close()
 
     # clear csv here?
-    return render_template('view.html')
+    if request.method == "POST":
+        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM AttendanceSubject")
+        output = cur.fetchall()
+        cur.close()
+        return render_template("view.html", data=output)
+    else:
+        return render_template("view.html")
 
 @recog.route("/shows", methods = ["POST", "GET"])
 def db():
