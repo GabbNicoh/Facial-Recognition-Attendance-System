@@ -168,7 +168,7 @@ def index():
 def video_feed():
     return Response(main_face_recog(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-def csv_database_attendace():
+def csv_database_attendance():
     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
     print('database connected')
     cursor = mydb.cursor()
