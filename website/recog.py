@@ -158,17 +158,21 @@ def main_face_recog():
 
 @recog.route('/face-recog')
 def index():
+    # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
+    
     return render_template('face-recog.html')
 
 @recog.route('/video_feed')
 def video_feed():
     return Response(main_face_recog(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 @recog.route('/view')
 def csv_database():
     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
     print('database connected')
     cursor = mydb.cursor()
     csv_data = csv.reader(open('website/attendance.csv'))
+    # for attendance
     next(csv_data)
     for row in csv_data:
         cursor.execute('INSERT INTO attendancesubject (id,atdc_name,atdc_date) VALUES(%s,%s,%s)', row)
@@ -179,6 +183,7 @@ def csv_database():
 
     cursor = mydb.cursor()
     csv_data = csv.reader(open('website/logging.csv'))
+    # for log
     next(csv_data)
     for row in csv_data:
         cursor.execute('INSERT INTO logsubject (id,log_name,log_time,log_status) VALUES(%s,%s,%s,%s)', row)
