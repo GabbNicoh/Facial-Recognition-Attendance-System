@@ -192,6 +192,8 @@ def csv_database():
 
     mydb.commit()
     cursor.close()
+
+    # clear csv here?
     return render_template('view.html')
 
 @recog.route('/shows')
