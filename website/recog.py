@@ -203,18 +203,6 @@ def csv_database_log():
     # clear csv here?
     return render_template('view.html')
 
-# @recog.route('/shows')
-# def database_html():
-#     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
-
-#     cursor = mydb.cursor()
-#     cursor.execute("SELECT * FROM class_list;")
-#     result = cursor.fetchall()
-#     print(result)
-#     mydb.commit()
-#     cursor.close()
-#     return render_template('shows.html')
-
 def db():
     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
     cur = mydb.cursor()
