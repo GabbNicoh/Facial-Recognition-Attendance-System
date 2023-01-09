@@ -3,7 +3,7 @@ import numpy as np
 import face_recognition
 import os
 from datetime import datetime
-from flask import Flask, render_template, Response, Blueprint
+from flask import Flask, render_template, Response, Blueprint, request
 import csv
 import mysql.connector
 import pandas as pd
@@ -196,17 +196,29 @@ def csv_database():
     # clear csv here?
     return render_template('view.html')
 
-@recog.route('/shows')
-def database_html():
-    mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+# @recog.route('/shows')
+# def database_html():
+#     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
 
-    cursor = mydb.cursor()
-    cursor.execute("SELECT * FROM class_list;")
-    result = cursor.fetchall()
-    print(result)
-    mydb.commit()
-    cursor.close()
-    return render_template('shows.html')
+#     cursor = mydb.cursor()
+#     cursor.execute("SELECT * FROM class_list;")
+#     result = cursor.fetchall()
+#     print(result)
+#     mydb.commit()
+#     cursor.close()
+#     return render_template('shows.html')
+
+@recog.route("/shows", methodes = ["POST", "GET"])
+def db():
+    if request.method == "POST":
+        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+        cur = mydb.cursor()
+        cur.execute("SELECT names FROM db WHERE id = 1")
+        output = cur.fetchone()
+        cur.close()
+        return render_template("shows.html", data = output)
+    else:
+        return render_template("shows.html")
 
 if __name__=='__main__':
     recog.run(debug=True)
