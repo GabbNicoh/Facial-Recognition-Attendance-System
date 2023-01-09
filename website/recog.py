@@ -158,11 +158,19 @@ def main_face_recog():
         img = buffer.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n')
 
-@recog.route('/face-recog')
+@recog.route('/face-recog', methods = ["POST", "GET"])
 def index():
     # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
-
-    return render_template('face-recog.html')
+    if request.method == "POST":
+        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM AttendanceSubject")
+        output = cur.fetchall()
+        cur.close()
+        return render_template("face-recog.html", data=output)
+    else:
+        return render_template("face-recog.html")
+        
 
 @recog.route('/video_feed')
 def video_feed():
@@ -203,13 +211,17 @@ def csv_database_log():
     # clear csv here?
     return render_template('view.html')
 
+@recog.route("/shows", methods = ["POST", "GET"])
 def db():
-    mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
-    cur = mydb.cursor()
-    cur.execute("SELECT * FROM AttendanceSubject")
-    output = cur.fetchall()
-    cur.close()
-    return render_template("face-recog.html", data=output)
+    if request.method == "POST":
+        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM AttendanceSubject")
+        output = cur.fetchall()
+        cur.close()
+        return render_template("shows.html", data=output)
+    else:
+        return render_template("shows.html")
 
 if __name__=='__main__':
     recog.run(debug=True)
