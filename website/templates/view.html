@@ -206,7 +206,7 @@
 	<div class="lblDiv">
 		<label>SUBJECT</label>
 	</div>
-	<button type="button" class="dlbtn">DOWNLOAD</button>
+	<button type="button" class="dlbtn" method="POST">SHOW</button>
 	<div class="myDiv">
 		<button class="dropdown">Choose another subject <i class='bx bxs-down-arrow'></i></button>
 		<div class="ddcontent">
@@ -216,17 +216,14 @@
 		</div>
 	</div>
 
-	<form method="POST">
-		<input type="submit" value="show data">
-	</form>
 	<div class="attendance">
-		{% for key, value in data.items() %}
+		{% for i in attd %}
 			<p>{{i}}</p>
 		{% endfor %}
 
 	</div>
 	<div class="logs">
-		{% for key, value in data.items() %}
+		{% for i in lg %}
 			<p>{{i}}</p>
 		{% endfor %}
 	</div>

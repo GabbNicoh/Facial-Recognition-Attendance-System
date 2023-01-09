@@ -202,8 +202,11 @@ def csv_database_log():
     # for log
     next(csv_data)
     for row in csv_data:
-        cursor.execute('INSERT INTO logsubject (id,log_name,log_time,log_status) VALUES(%s,%s,%s,%s)', row)
-        print(row)
+        try:
+            cursor.execute('INSERT INTO logsubject (id,log_name,log_time,log_status) VALUES(%s,%s,%s,%s)', row)
+            print(row)
+        except mysql.connector.errors.IntegrityError:
+            continue
 
     mydb.commit()
     cursor.close()
@@ -213,9 +216,11 @@ def csv_database_log():
         mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
         cur = mydb.cursor()
         cur.execute("SELECT * FROM AttendanceSubject")
-        output = cur.fetchall()
+        attd_output = cur.fetchall()
+        cur.execute("SELECT * FROM LogSubject")
+        lg_output = cur.fetchall()
         cur.close()
-        return render_template("view.html", data=output)
+        return render_template("view.html", attd=attd_output, lg=lg_output)
     else:
         return render_template("view.html")
 
