@@ -121,6 +121,7 @@ def main_face_recog():
                 if timer == 6: # if lasts for 6 seconds log
                     Logging(name)
                     Attendance(name)
+                    csv_database()
                     found = True
                 
                 detected_faces.append(f'{name}')
@@ -167,7 +168,6 @@ def index():
 def video_feed():
     return Response(main_face_recog(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@recog.route('/view')
 def csv_database():
     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
     print('database connected')
@@ -194,7 +194,6 @@ def csv_database():
     cursor.close()
 
     # clear csv here?
-    return render_template('view.html')
 
 # @recog.route('/shows')
 # def database_html():
