@@ -238,17 +238,17 @@ def csv_database_log():
     else:
         return render_template("view.html", attd="", lg="")
 
-# @recog.route("/shows", methods = ["POST", "GET"])
-# def db():
-#     if request.method == "POST":
-#         mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
-#         cur = mydb.cursor()
-#         cur.execute("SELECT * FROM AttendanceSubject")
-#         output = cur.fetchall()
-#         cur.close()
-#         return render_template("shows.html", data=output)
-#     else:
-#         return render_template("shows.html")
+@recog.route("/", methods = ["POST", "GET"])
+def db():
+    if request.method == "POST":
+        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM class_list where Class_Subject_ID = 'CSC 0312.1';")
+        output = cur.fetchall()
+        cur.close()
+        return render_template("home.html", data=output)
+    else:
+        return render_template("home.html")
 
 @recog.route('/download')
 def download_csv():
