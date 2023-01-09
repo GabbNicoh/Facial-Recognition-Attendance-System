@@ -176,8 +176,11 @@ def csv_database():
     # for attendance
     next(csv_data)
     for row in csv_data:
-        cursor.execute('INSERT INTO attendancesubject (id,atdc_name,atdc_date) VALUES(%s,%s,%s)', row)
-        print(row)
+        try:
+            cursor.execute('INSERT INTO attendancesubject (id,atdc_name,atdc_date) VALUES(%s,%s,%s)', row)
+            print(row)
+        except mysql.connector.errors.IntegrityError:
+            continue
 
     mydb.commit()
     cursor.close()
