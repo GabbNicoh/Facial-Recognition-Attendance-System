@@ -190,6 +190,28 @@
 			background-color: #FFA52A;
 			cursor: pointer;
 		}
+
+        .special {
+            margin-top: 2%;
+            margin-left: 2%;
+            margin-right: 2%;
+            text-align: right;
+            font-family: "Dosis ExtraBold";
+            font-size: 30px;
+            letter-spacing: 3px;
+            background: rgba(255,255,255,0.80);
+            border-radius: 40px;
+            height: 50px;
+            animation-name: fade;
+             animation-duration: 1s;
+             animation-fill-mode: forwards;
+        }
+        .special label {
+            margin-left: 35%;
+            margin-top: 0.5%;
+            float: left;
+            position: relative;
+        }
 		
 	</style>
 <meta charset="utf-8">
@@ -206,23 +228,20 @@
 	<div class="lblDiv">
 		<label>SUBJECT</label>
 	</div>
-	<form method="POST"><button type="submit" class="dlbtn" method="POST">SHOW</button></form>
+	<form method="POST"><button type="submit" class="dlbtn" method="POST">DOWNLOAD</button></form>
 	<div class="myDiv">
-		<button class="dropdown">Choose another subject <i class='bx bxs-down-arrow'></i></button>
-		<div class="ddcontent">
-			<a href="#">Subject 1</a>
-			<a href="#">Subject 2</a>
-			<a href="#">Subject 3</a>
-		</div>
+		<form method="POST"><button type="submit" class="dlbtn" method="POST">SHOW</button></form>
 	</div>
 
 	<div class="attendance">
+		<div class="special"><label>Attendance</label></div>
 		{% for i in attd %}
 			<p>{{i}}</p>
 		{% endfor %}
 
 	</div>
 	<div class="logs">
+		<div class="lblDiv"><label>Logs</label></div>
 		{% for i in lg %}
 			<p>{{i}}</p>
 		{% endfor %}
