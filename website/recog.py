@@ -208,15 +208,15 @@ def csv_database():
 #     cursor.close()
 #     return render_template('shows.html')
 
-@recog.route("/shows", methodes = ["POST", "GET"])
+@recog.route("/shows", methods = ["POST", "GET"])
 def db():
     if request.method == "POST":
         mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
         cur = mydb.cursor()
-        cur.execute("SELECT names FROM db WHERE id = 1")
-        output = cur.fetchone()
+        cur.execute("SELECT * FROM AttendanceSubject")
+        output = cur.fetchall()
         cur.close()
-        return render_template("shows.html", data = output)
+        return render_template("shows.html", data=output)
     else:
         return render_template("shows.html")
 

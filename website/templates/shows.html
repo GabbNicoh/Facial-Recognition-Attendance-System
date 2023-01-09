@@ -7,11 +7,8 @@
 </form>
 
 <!-- Output 1 -->
-<p>{{data['names']}}</p>
-
-<!-- Output 2 -->
-{% for key, value in data.items() %}
-    <p>{{value}}</p>
+{% for i in data %}
+    <p>{{i}}</p>
 {% endfor %}
 
 
