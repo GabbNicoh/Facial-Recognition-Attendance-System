@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import Flask, render_template, Response, Blueprint
 import csv
 import mysql.connector
+import pandas as pd
 
 # app = Flask(__name__)
 recog = Blueprint('recog', __name__)
@@ -187,6 +188,18 @@ def csv_database():
     mydb.commit()
     cursor.close()
     return render_template('view.html')
+
+@recog.route('/shows')
+def database_html():
+    mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+
+    cursor = mydb.cursor()
+    cursor.execute("SELECT * FROM class_list;")
+    result = cursor.fetchall()
+    print(result)
+    mydb.commit()
+    cursor.close()
+    return render_template('shows.html')
 
 if __name__=='__main__':
     recog.run(debug=True)
