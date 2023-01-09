@@ -9,8 +9,8 @@ DB_NAME = "database.db"
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hasflkajsfoi nfowieaf vaspoifje'
-    # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:0170@localhost/facedb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:0170@localhost/facedb'
     db.init_app(app)
 
     # register views to run here
