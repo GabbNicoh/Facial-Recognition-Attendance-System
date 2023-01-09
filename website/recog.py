@@ -161,14 +161,14 @@ def main_face_recog():
 @recog.route('/face-recog')
 def index():
     # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
-    
+
     return render_template('face-recog.html')
 
 @recog.route('/video_feed')
 def video_feed():
     return Response(main_face_recog(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-def csv_database_attendace():
+def csv_database_attendance():
     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
     print('database connected')
     cursor = mydb.cursor()
@@ -215,17 +215,13 @@ def csv_database_log():
 #     cursor.close()
 #     return render_template('shows.html')
 
-@recog.route("/shows", methods = ["POST", "GET"])
 def db():
-    if request.method == "POST":
-        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
-        cur = mydb.cursor()
-        cur.execute("SELECT * FROM AttendanceSubject")
-        output = cur.fetchall()
-        cur.close()
-        return render_template("shows.html", data=output)
-    else:
-        return render_template("shows.html")
+    mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+    cur = mydb.cursor()
+    cur.execute("SELECT * FROM AttendanceSubject")
+    output = cur.fetchall()
+    cur.close()
+    return render_template("face-recog.html", data=output)
 
 if __name__=='__main__':
     recog.run(debug=True)
