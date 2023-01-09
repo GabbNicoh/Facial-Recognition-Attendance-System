@@ -3,7 +3,11 @@ import numpy as np
 import face_recognition
 import os
 from datetime import datetime
-from flask import Flask, render_template, Response, Blueprint
+from flask import Flask, render_template, Response, Blueprint, request, send_file
+import csv
+import mysql.connector
+from flask_login import login_user, login_required, logout_user, current_user
+import pandas as pd
 
 # app = Flask(__name__)
 recog = Blueprint('recog', __name__)
@@ -13,6 +17,8 @@ encodeStdKnown = []
 path = 'image'
 myList = os.listdir(path)
 
+# df = pd.read_csv("website/attendance.csv")
+# df.to_csv("website/attendance.csv", index=None)
 for cl in myList:
     stdNames.append(os.path.splitext(cl)[0])
 print(stdNames)
@@ -24,52 +30,53 @@ def findEncodings():
         encodeStdKnown.append(face_encoding)
 
 def Attendance(name):
-    with open('attendance.csv', 'r+') as f:
+    with open('website/attendance.csv', 'r+') as f:
         AttendanceList = []
         myDataList = f.readlines()
         for line in myDataList:
             entry = line.split(',')
-            AttendanceList.append(entry[0])
+            AttendanceList.append(entry[1])
         if name not in AttendanceList:
             now = datetime.now()
             dtString = now.strftime('%H:%M')
-            f.writelines(f'\n{name},{dtString}')
+            f.writelines(f'\n{len(AttendanceList)},{name},{dtString}')
 
 logStatus = {}
 nameList = []
 def Logging(name):
-    with open('logging.csv', 'r+') as f:
+    with open('website/logging.csv', 'r+') as f:
         # print(f'INITIAL: {logStatus}')
         myDataList = f.readlines()
         status = ''
         for line in myDataList:
             entry = line.rstrip('\n').split(',')
             # print(f'ENTRY: {entry}')
-            nameList.append(entry[0])
-            logStatus[entry[0]] = entry[2]
-            
+            nameList.append(entry[1])
+            logStatus[entry[1]] = entry[3]
+
         if name not in nameList:
             now = datetime.now()
             time = now.strftime('%H:%M:%S')
             status = 'IN'
             logStatus[name] = status
-            f.writelines(f'\n{name},{time},{status}')
-        
+            f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
+
         if name in nameList:
-            if logStatus[name] == 'IN': 
+            if logStatus[name] == 'IN':
                 now = datetime.now()
                 time = now.strftime('%H:%M:%S')
                 status = 'OUT'
                 logStatus[name] = status
-                f.writelines(f'\n{name},{time},{status}')
+                f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
             elif logStatus[name] == 'OUT':
                 now = datetime.now()
                 time = now.strftime('%H:%M:%S')
                 status = 'IN'
                 logStatus[name] = status
-                f.writelines(f'\n{name},{time},{status}')
+                f.writelines(f'\n{len(myDataList)},{name},{time},{status}')
 
         # print(f'OUTPUT: {logStatus}')
+
 
 findEncodings()
 print('Encoding Complete')
@@ -116,8 +123,9 @@ def main_face_recog():
                 timer += 1
                 if timer == 6: # if lasts for 6 seconds log
                     Logging(name)
-                    found = True
                     Attendance(name)
+                    csv_database_attendance()
+                    found = True
                 
                 detected_faces.append(f'{name}')
 
@@ -153,13 +161,101 @@ def main_face_recog():
         img = buffer.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n')
 
-@recog.route('/face-recog')
+@recog.route('/face-recog', methods = ["POST", "GET"])
+@login_required
 def index():
-    return render_template('face-recog.html')
+    # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
+    if request.method == "POST":
+        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM AttendanceSubject")
+        output = cur.fetchall()
+        cur.close()
+        return render_template("face-recog.html", data=output)
+    else:
+        return render_template("face-recog.html")
+
+
+# @recog.route('/face-recog', methods = ["POST", "GET"])
+# def index():
+#     # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
+#
+#     data = pd.read_csv("website/attendance.csv")
+#     print(data)
+#     return render_template("face-recog.html", tables=[data.to_html()], titles=[''])
+        
 
 @recog.route('/video_feed')
 def video_feed():
     return Response(main_face_recog(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+def csv_database_attendance():
+    mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+    print('database connected')
+    cursor = mydb.cursor()
+    csv_data = csv.reader(open('website/attendance.csv'))
+    # for attendance
+    next(csv_data)
+    for row in csv_data:
+        try:
+            cursor.execute('INSERT INTO attendancesubject (id,atdc_name,atdc_date) VALUES(%s,%s,%s)', row)
+            print(row)
+        except mysql.connector.errors.IntegrityError:
+            continue
+
+    mydb.commit()
+    cursor.close()
+
+@recog.route('/view', methods = ["POST", "GET"])
+@login_required
+def csv_database_log():
+    mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+    print('database connected')
+    cursor = mydb.cursor()
+    csv_data = csv.reader(open('website/logging.csv'))
+    # for log
+    next(csv_data)
+    for row in csv_data:
+        try:
+            cursor.execute('INSERT INTO logsubject (id,log_name,log_time,log_status) VALUES(%s,%s,%s,%s)', row)
+            print(row)
+        except mysql.connector.errors.IntegrityError:
+            continue
+
+    mydb.commit()
+    cursor.close()
+
+    # clear csv here?
+    if request.method == "POST":
+        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM AttendanceSubject")
+        attd_output = cur.fetchall()
+        cur.execute("SELECT * FROM LogSubject")
+        lg_output = cur.fetchall()
+        cur.close()
+        return render_template("view.html", attd=attd_output, lg=lg_output)
+    else:
+        return render_template("view.html", attd="", lg="")
+
+@recog.route("/", methods = ["POST", "GET"])
+def db():
+    if request.method == "POST":
+        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM class_list where Class_Subject_ID = 'CSC 0312.1';")
+        output = cur.fetchall()
+        cur.close()
+        return render_template("home.html", data=output)
+    else:
+        return render_template("home.html")
+
+@recog.route('/download')
+def download_csv():
+    attdnc = 'attendance.csv'
+    llg = 'logging.csv'
+
+    return send_file(llg, attdnc, as_attachment=True)
 
 if __name__=='__main__':
     recog.run(debug=True)

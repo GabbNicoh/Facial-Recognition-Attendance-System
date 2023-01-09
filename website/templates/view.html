@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+<head>
+	<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		/*override settings*/
+		html,
+		body {
+  			margin: 0;
+  			padding: 0;
+}
+		/* use viewport-relative units to cover page fully */
+		body {
+  			height: 100vh;
+  			width: 100vw;
+			
+}
+		@-webkit-keyframes fade {
+  			0%   { opacity: 0; }
+  			100% { opacity: 1; }
+		}
+		@-moz-keyframes fade {
+ 	 		0%   { opacity: 0; }
+  			100% { opacity: 1; }
+		}
+		@-o-keyframes fade {
+  			0%   { opacity: 0; }
+  			100% { opacity: 1; }
+		}
+		@keyframes fade {
+  			0%   { opacity: 0; }
+  			100% { opacity: 1; }
+		}
+		body {
+			background-image: url(static/4.jpg);
+			background-size: cover;
+			font-family: "Glacial Indifference";
+		}
+		
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #333;
+		}
+		
+		li {
+			float: left;
+		}
+		
+		li a {
+  			display: block;
+  			color: white;
+  			text-align: center;
+  			padding: 18px 16px;
+  			text-decoration: none;
+			font-family: "Glacial Indifference";
+			letter-spacing: 3px;
+
+		}
+		
+		li a:hover {
+  			background-color: #111;
+		}
+		
+		li a i {
+			font-size: 1.1em;
+		}
+		
+		.active {
+  			background-color: #111;
+		}
+		
+		.myDiv {
+			font-family: "Glacial Indifference";
+			padding: 20px 16px;
+			margin-left: 1%;
+			height: 20px;
+			position: absolute;
+			display: inline-block;
+			
+		}
+		
+		.lblDiv {
+			margin-top: 2%;
+			margin-left: 2%;
+			margin-right: 2%;
+			text-align: right;
+			font-family: "Dosis ExtraBold";
+			font-size: 30px;
+			letter-spacing: 3px;
+			background: rgba(255,255,255,0.80);
+			border-radius: 40px;
+			height: 50px;
+			animation-name: fade;
+ 			animation-duration: 1s; 
+ 			animation-fill-mode: forwards;
+			
+		}
+		
+		.lblDiv label {
+			margin-left: 45%;
+			margin-top: 0.5%;
+			float: left;
+			position: relative;
+
+			
+		}
+		.dropdown {
+			background-color: white;
+			border: solid;
+			font-size: 16px;
+			padding: 10px;
+			cursor: pointer;
+			animation-name: fade;
+ 			animation-duration: 1s; 
+ 			animation-fill-mode: forwards;
+		}
+		
+		.ddcontent {
+			display: none;
+			position: absolute;
+  			background-color: #f9f9f9;
+  			min-width: 160px;
+  			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  			z-index: 1;
+		}
+		
+		.ddcontent a {
+			color: black;
+ 			padding: 12px 16px;
+  			text-decoration: none;
+  			display: block;
+		}
+		
+		.ddcontent a:hover {background-color: #f1f1f1}
+		
+		.myDiv:hover .ddcontent {display: block;}
+		
+		.myDiv:hover .dropdown {background-color: gray;}
+		
+		.attendance {
+			background: rgba(255,255,255,0.80);
+			width: 500px;
+			height: 380px;
+			margin-top: 6%;
+			margin-left: 2%;
+			float: left;
+			position: relative;
+			animation-name: fade;
+ 			animation-duration: 1s; 
+ 			animation-fill-mode: forwards;
+		}
+		
+		.logs {
+			background: rgba(255,255,255,0.80);
+			width: 700px;
+			height: 380px;
+			float: right;
+			position: relative;
+			margin-top: 1.4%;
+			margin-right: 2%;
+			animation-name: fade;
+ 			animation-duration: 1s; 
+ 			animation-fill-mode: forwards;
+		}
+		
+		.dlbtn{
+			background-color: #FF9012;
+			color: white;
+			border: none;
+			font-family: "Glacial Indifference";
+			font-size: 16px;
+			font-weight: bold;
+			letter-spacing: 4px;
+			width: 170px;
+			height: 40px;
+			float: right;
+			position: relative;
+			margin-top: 1.5%;
+			margin-right: 40px;
+			animation-name: fade;
+ 			animation-duration: 1s; 
+ 			animation-fill-mode: forwards;
+		}
+		
+		.dlbtn:hover {
+			background-color: #FFA52A;
+			cursor: pointer;
+		}
+
+        .special {
+            margin-top: 2%;
+            margin-left: 2%;
+            margin-right: 2%;
+            text-align: right;
+            font-family: "Dosis ExtraBold";
+            font-size: 30px;
+            letter-spacing: 3px;
+            background: rgba(255,255,255,0.80);
+            border-radius: 40px;
+            height: 50px;
+            animation-name: fade;
+             animation-duration: 1s;
+             animation-fill-mode: forwards;
+        }
+        .special label {
+            margin-left: 35%;
+            margin-top: 0.5%;
+            float: left;
+            position: relative;
+        }
+		
+	</style>
+<meta charset="utf-8">
+<title>VIEW</title>
+</head>
+<body>
+	<ul>
+		<li style="font-family: 'Montserrat Black';color: white;padding: 18px 16px;font-size: 18px;letter-spacing: 15px; margin-left: 1%;"> FRAMeS</li>
+  		<li><a href="/"><i class='bx bxs-home'></i> HOME</a></li>
+  		<li><a href="/face-recog"><i class='bx bxs-user-account'></i> START</a></li>
+  		<li><a class="active" href="/view"><i class='bx bxs-file-find'></i> VIEW</a></li>
+  		<li style="float: right;"><a href="/logout"><i class='bx bxs-exit'></i> SIGN OUT</a></li>
+	</ul>
+	<div class="lblDiv">
+		<label>SUBJECT</label>
+	</div>
+	<button type="submit" class="dlbtn"><a href="{{url_for('recog.download_csv')}}">DOWNLOAD</a></button>
+	<div class="myDiv">
+		<form method="POST"><button type="submit" class="dlbtn" method="POST">SHOW</button></form>
+	</div>
+
+	<div class="attendance">
+		<div class="special"><label>Attendance</label></div>
+		{% for i in attd %}
+			<p>{{i}}</p>
+		{% endfor %}
+
+	</div>
+	<div class="logs">
+		<div class="lblDiv"><label>Logs</label></div>
+		{% for i in lg %}
+			<p>{{i}}</p>
+		{% endfor %}
+	</div>
+</body>
+</html>

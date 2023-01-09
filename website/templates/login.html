@@ -1,28 +1,191 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} 
-{% block content%}
-    <form method="POST">
-        <h3 align="center">Login</h3>
-        <div class="form-group">
-            <label for="id_num">Instructors ID Number</label>
-            <input
-                type="id_num"
-                class="form-control"
-                id="id_num"
-                name="id_num"
-                placeholder="Enter ID Number"
-            />
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                placeholder="Enter password"
-            />
-        </div>
-        <br />
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+{% block content %}
+<!doctype html>
+<html>
+<head>
+	<style>
+		@-webkit-keyframes fade {
+  			0%   { opacity: 0; }
+  			100% { opacity: 1; }
+		}
+		@-moz-keyframes fade {
+ 	 		0%   { opacity: 0; }
+  			100% { opacity: 1; }
+		}
+		@-o-keyframes fade {
+  			0%   { opacity: 0; }
+  			100% { opacity: 1; }
+		}
+		@keyframes fade {
+  			0%   { opacity: 0; }
+  			100% { opacity: 1; }
+		}
+		body {
+			background-image: url(static/1.jpg);
+			background-repeat: no-repeat;
+			background-size: cover;
+			animation-name: fade;
+ 			animation-duration: 1s; 
+ 			animation-fill-mode: backwards;
+		}
+		
+		.container {
+			width: 100%;
+		}
+		.box {
+			margin: 7%;
+			width: 1060px;
+			height: 425px;
+			background: rgba(255,255,255,0.85);
+			padding: 10px;
+			}
+
+		.login {
+			float:left;
+			background-color: #E9E9EB;
+			width: 450px;
+			height: 325px;
+			text-align: center;
+			color: #46489f;
+			padding-top: 2px;
+			border-radius: 10px;
+			margin-left: 3%;
+			margin-top: 4.5%;
+			font-family: "Glacial Indifference";
+		}
+		
+		.myimg {
+			margin-top: 2%;
+			float:right;
+			width: 425px;
+			height: 350px;
+			margin-right: 8.5%;
+		}
+		
+		h1 {
+			letter-spacing: 7px;
+		}
+		
+		h2 {
+			margin-left: 15px;
+			font-family: "Glacial Indifference";
+			letter-spacing: 7px;
+			font-size: 27px;
+			color: #002060;
+		}
+		
+		.lform {
+			font-family: "Glacial Indifference";
+			font-weight: bold;
+		}
+		.lb1 {
+			margin-left: 12%;
+			text-align: left;
+			float: left;
+			padding-bottom: 5px;
+			font-size: 11px;
+			font-weight: bold;
+			letter-spacing: 2px;
+			font-family: "League Spartan";
+		}
+		
+		.lb2 {
+			margin-left: 12%;
+			text-align: left;
+			float: left;
+			padding-top: 20px;
+			padding-bottom: 5px;
+			font-size: 11px;
+			font-weight: bold;
+			letter-spacing: 2px;
+			font-family: "League Spartan";
+		}
+		
+		input[type=text], input[type=password] {
+			width: 75%;
+			padding-top: 3px;
+			padding-bottom: 3px;
+			padding-left: 3px;
+			padding-right: 3px;
+        	border: 0;
+  			outline: 0;
+  			background: transparent;
+  			border-bottom: 2px solid #46489F;
+		}
+		button { 
+       		background-color: #F9992B; 
+       		width: 50%;
+			height: 43px;
+        	color: white;
+			margin: 5%;
+        	border: none;
+			letter-spacing: 5px;
+			font-weight: bold;
+			font-size: 14px;
+		}
+		
+		button:hover {
+			background-color: #FFB25A;
+		}
+		
+		a {
+			float: right;
+			margin-right: 13%;
+			margin-top: 5%;
+			font-size: 11px;
+			letter-spacing: 2px;
+			color: black;
+			font-family: "Fredoka One";
+		}
+		
+		
+	</style>
+<meta charset="utf-8">
+<title>Facial Recognition Software</title>
+	<script type="text/javascript">
+	{% with messages = get_flashed_messages(with_categories=true) %} {% if
+		messages %} {% for category, message in messages %} {% if category ==
+		'error' %}
+		alert("{{message}}")
+	{% endif %} {% endfor %} {% endif %} {% endwith %}
+	</script>
+</head>
+<body>
+	<div class ="container">
+		<div class ="box">
+			<div class ="login">
+				<h1 class="hlogin">LOGIN</h1>
+				<form method="POST">
+					<br />
+                    <div class="lform">
+                        <label class='lb1' for="id_num">Instructors ID Number</label>
+                        <input
+                            type="text"
+                            id="user"
+                            name="id_num"
+                            placeholder="Enter ID Number"
+                            required
+                        />
+                    </div>
+                    <div class="lform">
+                        <label class='lb2' for="password">Password</label>
+                        <input
+                            type="password"
+                            id="pw"
+                            name="password"
+                            placeholder="Enter password"
+                            required
+                        />
+                    </div>
+                    <br />
+                    <button type="submit">SUBMIT</button>
+                </form>
+			</div>
+			<div class="myimg">
+				<h2>WELCOME</h2>
+				<img src="static/LOGO2.png" alt="FRMS" style="width:470px">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
 {% endblock %}

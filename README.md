@@ -58,12 +58,16 @@ Detect and recognize a student's face using Python and OpenCV. After recognizing
 - Database MySQL Driver
 > pip install mysql-connector-python
 
+> pip install pymysql
+
 - Web
 > pip install flask
 
 > pip install flask-login
 
 > pip install flask-sqlalchemy
+
+> pip install sql.connector
 
 ## Classifer & Algorithm
 https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78
@@ -113,3 +117,11 @@ Let’s review the steps we followed:
     - handling information from one page to another
   - Message FlaSh
   - DATABASE MODELS
+
+
+## DATABASE
+- [ ] print from database to html
+- [ ] connect csv to html to database
+
+## UI
+- [ ] make responsive
