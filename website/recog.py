@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import Flask, render_template, Response, Blueprint, request, send_file
 import csv
 import mysql.connector
+from flask_login import login_user, login_required, logout_user, current_user
 import pandas as pd
 
 # app = Flask(__name__)
@@ -161,6 +162,7 @@ def main_face_recog():
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n')
 
 @recog.route('/face-recog', methods = ["POST", "GET"])
+@login_required
 def index():
     # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
     if request.method == "POST":
@@ -205,6 +207,7 @@ def csv_database_attendance():
     cursor.close()
 
 @recog.route('/view', methods = ["POST", "GET"])
+@login_required
 def csv_database_log():
     mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
     print('database connected')
@@ -235,24 +238,24 @@ def csv_database_log():
     else:
         return render_template("view.html", attd="", lg="")
 
-@recog.route("/shows", methods = ["POST", "GET"])
-def db():
-    if request.method == "POST":
-        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
-        cur = mydb.cursor()
-        cur.execute("SELECT * FROM AttendanceSubject")
-        output = cur.fetchall()
-        cur.close()
-        return render_template("shows.html", data=output)
-    else:
-        return render_template("shows.html")
+# @recog.route("/shows", methods = ["POST", "GET"])
+# def db():
+#     if request.method == "POST":
+#         mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+#         cur = mydb.cursor()
+#         cur.execute("SELECT * FROM AttendanceSubject")
+#         output = cur.fetchall()
+#         cur.close()
+#         return render_template("shows.html", data=output)
+#     else:
+#         return render_template("shows.html")
 
 @recog.route('/download')
 def download_csv():
-    attdnc = 'website/attendance.csv'
-    lgg = 'website/logging.csv'
-    
-    return send_file(lgg, attdnc, as_attachment=True)
+    attdnc = 'attendance.csv'
+    llg = 'logging.csv'
+
+    return send_file(llg, attdnc, as_attachment=True)
 
 if __name__=='__main__':
     recog.run(debug=True)
