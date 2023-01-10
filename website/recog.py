@@ -246,7 +246,18 @@ def db():
         cur.execute("SELECT Student_ID, Last_Name, First_Name, Middle_Name, Student_Status FROM class_list where Class_Subject_ID = 'CSC 0312.1' ORDER BY Last_Name;")
         output = cur.fetchall()
         cur.close()
-        return render_template("home.html", data=output)
+
+        StdID = []
+        Lst_Name = []
+        Frst_Name = []
+        Std_Status = []
+
+        for line in output:
+            print(output)
+            # field = i.split(',')
+            # fieldList.append(entry[1])
+
+        return render_template("home.html", stdID, lstName, frstName, StdStatus)
     else:
         return render_template("home.html")
 

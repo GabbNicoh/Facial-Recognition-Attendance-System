@@ -146,11 +146,6 @@
 		</div>
 		<form method="POST"><button type="submit" class="dlbtn" method="POST">SHOW</button></form>
 		<div class="sbjcode">
-<!--			<select name="class_list" id="class_list" size="23">-->
-<!--			{% for i in data %}-->
-<!--				<option>{{i}}</option>-->
-<!--			{% endfor %}-->
-<!--			</select>-->
 			<table class="">
 				<tr>
 					<th>Student ID</th>
@@ -161,7 +156,12 @@
 				</tr>
 				<tr>
 					{% for i in data %}
-					<td>{{i}}</td>
+						{% field = i.split(',') %}
+						{% fieldList.append(entry[1]) %}
+						<td>{{i.StudentID}}</td>
+						<td>{{i.Last_Name}}</td>
+						<td>{{i.First_Name}}</td>
+						<td>{{i.Student_Status}}</td>
 					{% endfor %}
 				</tr>
 
