@@ -152,7 +152,6 @@
 			animation-name: fade;
  			animation-duration: 1s; 
  			animation-fill-mode: forwards;
- 			oveflow-y: auto;
 		}
 		
 		.logs {
@@ -166,7 +165,6 @@
 			animation-name: fade;
  			animation-duration: 1s; 
  			animation-fill-mode: forwards;
- 			overflow-y: auto;
 		}
 		
 		.dlbtn{
@@ -224,6 +222,7 @@
 			text-align: center;
 			border-collapse:collapse;
 		}
+
 		.logs table {
 			width: 700px;
 			font-family: 'Century Gothic';
@@ -254,6 +253,33 @@
 		tr:nth-child(even) {
 			background-color: white;
 		}
+		.lbl {
+		background-color: transparent;
+		font-family: 'Glacial Indifference';
+		font-size: 15px;
+		width: 100%;
+		height: 25px;
+		text-align: center;
+		letter-spacing: 7px;
+		padding-top: 6px;
+		font-weight: bold;
+		}
+		.lbl label {
+		position: sticky;
+		top: 0;
+		}
+		.tbl {
+		width: 500px;
+		overflow-y: auto;
+		height: 355px;
+
+		}
+		.tbl2 {
+		width: 700px;
+		overflow-y: auto;
+		height: 355px;
+
+		}
 	</style>
 <meta charset="utf-8">
 <title>VIEW</title>
@@ -275,43 +301,53 @@
 	</div>
 
 	<div class="attendance">
-		<table>
-				<thead>
-				<tr>
-					<th>Name</th>
-					<th>Time</th>
-				</tr>
-				</thead>
-				<tbody>
-				{% for x in range(at_len) %}
-                <tr>
-                        <td>{{att_name[x]}}</td>
-                        <td>{{att_time[x]}}</td>
-                </tr>
-                {% endfor %}
-				</tbody>
-		</table>
+		<div class="lbl">
+			<label>ATTENDANCE</label>
+		</div>
+		<div class="tbl">
+			<table>
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Time</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for x in range(at_len) %}
+					<tr>
+							<td>{{att_name[x]}}</td>
+							<td>{{att_time[x]}}</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+			</table>
+		</div>
 
 	</div>
 	<div class="logs">
-		<table>
-				<thead>
-				<tr>
-					<th>Name</th>
-					<th>Time</th>
-					<th>Status</th>
-				</tr>
-				</thead>
-				<tbody>
-				{% for x in range(lg_len) %}
-                <tr>
-                        <td>{{lgg_name[x]}}</td>
-                        <td>{{lgg_time[x]}}</td>
-                        <td>{{lgg_status[x]}}</td>
-                </tr>
-                {% endfor %}
-				</tbody>
-		</table>
+		<div class="lbl">
+			<label>LOGS</label>
+		</div>
+		<div class="tbl2">
+			<table>
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Time</th>
+						<th>Status</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for x in range(lg_len) %}
+					<tr>
+							<td>{{lgg_name[x]}}</td>
+							<td>{{lgg_time[x]}}</td>
+							<td>{{lgg_status[x]}}</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
