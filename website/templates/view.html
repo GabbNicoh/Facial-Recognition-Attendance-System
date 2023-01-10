@@ -212,7 +212,21 @@
             float: left;
             position: relative;
         }
-		
+		.attendance select {
+		background-color: transparent;
+		border: none;
+		width: 480px;
+		margin: 2%;
+
+		}
+		.logs select {
+		background-color: transparent;
+		border: none;
+		width: 680px;
+		margin: 2%;
+		font-family: 'Georgia';
+		letter-spacing: 2px;
+		}
 	</style>
 <meta charset="utf-8">
 <title>VIEW</title>
@@ -234,17 +248,19 @@
 	</div>
 
 	<div class="attendance">
-		<div class="special"><label>Attendance</label></div>
-		{% for i in attd %}
-			<p>{{i}}</p>
-		{% endfor %}
+		<select name="class_list" id="class_list" size="21">
+			{% for i in attd %}
+				<option>{{i}}</option>
+			{% endfor %}
+		</select>
 
 	</div>
 	<div class="logs">
-		<div class="lblDiv"><label>Logs</label></div>
-		{% for i in lg %}
-			<p>{{i}}</p>
-		{% endfor %}
+		<select name="class_list" id="class_list" size="21">
+			{% for i in lg %}
+				<option>{{i}}</option>
+			{% endfor %}
+		</select>
 	</div>
 </body>
 </html>
