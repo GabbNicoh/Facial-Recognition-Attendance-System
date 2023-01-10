@@ -243,19 +243,28 @@ def db():
     if request.method == "POST":
         mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
         cur = mydb.cursor()
-        cur.execute("SELECT * FROM class_list where Class_Subject_ID = 'CSC 0312.1';")
+        cur.execute("SELECT Student_ID, Last_Name, First_Name, Middle_Name, Student_Status FROM class_list where Class_Subject_ID = 'CSC 0312.1' ORDER BY Last_Name;")
         output = cur.fetchall()
         cur.close()
         return render_template("home.html", data=output)
     else:
         return render_template("home.html")
 
+from glob import glob
+from io import BytesIO
+from zipfile import ZipFile
 @recog.route('/download')
+# @login_required
 def download_csv():
-    attdnc = 'attendance.csv'
-    llg = 'logging.csv'
+    stream = BytesIO()
+    with ZipFile(stream, 'w') as zf:
+        print("HELLO")
+        for file in glob(os.path.join('website/', '*.csv')):
+            print(f'FILES: {file}')
+            zf.write(file, os.path.basename(file))
+    stream.seek(0)
 
-    return send_file(llg, attdnc, as_attachment=True)
+    return send_file(stream, as_attachment=True, download_name='attendance_log_record.zip')
 
 if __name__=='__main__':
     recog.run(debug=True)
