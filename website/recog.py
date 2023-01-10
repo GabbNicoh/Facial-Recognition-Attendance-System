@@ -161,28 +161,42 @@ def main_face_recog():
         img = buffer.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n')
 
+# @recog.route('/face-recog', methods = ["POST", "GET"])
+# @login_required
+# def index():
+#     # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
+#     if request.method == "POST":
+#         mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
+#         cur = mydb.cursor()
+#         cur.execute("SELECT * FROM AttendanceSubject")
+#         output = cur.fetchall()
+#         cur.close()
+#         return render_template("face-recog.html", data=output)
+#     else:
+#         return render_template("face-recog.html")
+
+
 @recog.route('/face-recog', methods = ["POST", "GET"])
-@login_required
 def index():
     # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
     if request.method == "POST":
         mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
         cur = mydb.cursor()
         cur.execute("SELECT * FROM AttendanceSubject")
-        output = cur.fetchall()
+        attd_output = cur.fetchall()
         cur.close()
-        return render_template("face-recog.html", data=output)
+
+        at_name = []
+        at_time = []
+
+        for line in attd_output:
+            newLine = list(line)
+            at_name.append(newLine[1])
+            at_time.append(newLine[2])
+
+        return render_template("face-recog.html", att_name = at_name, att_time = at_time, at_len = len(at_name))
     else:
-        return render_template("face-recog.html")
-
-
-# @recog.route('/face-recog', methods = ["POST", "GET"])
-# def index():
-#     # ADD HERE FUNCTION FOR GRABBING FROM ATTENDANCE AND SAVING FROM CSV TO DATABASE (base from auth)
-#
-#     data = pd.read_csv("website/attendance.csv")
-#     print(data)
-#     return render_template("face-recog.html", tables=[data.to_html()], titles=[''])
+        return render_template("face-recog.html", att_name = "", att_time = "", at_len=0)
         
 
 @recog.route('/video_feed')
