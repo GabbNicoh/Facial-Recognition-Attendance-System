@@ -238,29 +238,6 @@ def csv_database_log():
     else:
         return render_template("view.html", attd="", lg="")
 
-@recog.route("/", methods = ["POST", "GET"])
-def db():
-    if request.method == "POST":
-        mydb = mysql.connector.connect(host='localhost', user='root', password='0170', database='facedb')
-        cur = mydb.cursor()
-        cur.execute("SELECT Student_ID, Last_Name, First_Name, Middle_Name, Student_Status FROM class_list where Class_Subject_ID = 'CSC 0312.1' ORDER BY Last_Name;")
-        output = cur.fetchall()
-        cur.close()
-
-        StdID = []
-        Lst_Name = []
-        Frst_Name = []
-        Std_Status = []
-
-        for line in output:
-            print(output)
-            # field = i.split(',')
-            # fieldList.append(entry[1])
-
-        return render_template("home.html", stdID, lstName, frstName, StdStatus)
-    else:
-        return render_template("home.html")
-
 from glob import glob
 from io import BytesIO
 from zipfile import ZipFile

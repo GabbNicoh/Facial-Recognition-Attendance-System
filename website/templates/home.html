@@ -99,6 +99,18 @@
 			margin-left: 5%;
 			margin-top: 4%;
 			border-radius: 25px;
+			overflow-y: auto;
+
+		}
+		table {
+			width: 740px;
+
+		}
+		.sbjcode thead th {
+			position: sticky;
+			top: 0px;
+			background-color: #AC3C89;
+			border-collapse: collapse;
 		}
 		.lblDiv {
 			margin-top: 2%;
@@ -132,6 +144,7 @@
 			margin: 2%;
 
 		}
+
 	</style>
 <meta charset="utf-8">
 <title>HOMEPAGE</title>
@@ -144,27 +157,26 @@
 		<div class="lblDiv">
 		  <label>CSC 0312.1</label>
 		</div>
-		<form method="POST"><button type="submit" class="dlbtn" method="POST">SHOW</button></form>
 		<div class="sbjcode">
-			<table class="">
+			<table>
+				<thead>
 				<tr>
 					<th>Student ID</th>
 					<th>Last Name</th>
 					<th>First Name</th>
-					<th>Middle Name</th>
 					<th>Status</th>
 				</tr>
-				<tr>
-					{% for i in data %}
-						{% field = i.split(',') %}
-						{% fieldList.append(entry[1]) %}
-						<td>{{i.StudentID}}</td>
-						<td>{{i.Last_Name}}</td>
-						<td>{{i.First_Name}}</td>
-						<td>{{i.Student_Status}}</td>
-					{% endfor %}
-				</tr>
-
+				</thead>
+				<tbody>
+				{% for x in range(len) %}
+                <tr>
+                        <td>{{stdID[x]}}</td>
+                        <td>{{lstName[x]}}</td>
+                        <td>{{frstName[x]}}</td>
+                        <td>{{StdStatus[x]}}</td>
+                </tr>
+                {% endfor %}
+				</tbody>
 			</table>
 		</div>
 	</div>
