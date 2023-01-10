@@ -212,20 +212,73 @@
             float: left;
             position: relative;
         }
-		.attendance select {
+		a{
+			text-decoration: none;
+			color: white;
+		}
+		.attendance table {
+			width: 500px;
+			font-family: 'Century Gothic';
+			text-align: center;
+			border-collapse:collapse;
+		}
+
+		.logs table {
+			width: 700px;
+			font-family: 'Century Gothic';
+			text-align: center;
+			border-collapse:collapse;
+		}
+
+		.attendance thead th {
+			position: sticky;
+			top: 0px;
+			height: 35px;
+			width: 10px;
+			color: white;
+			background-color: #FCB30E;
+			border-collapse: collapse;
+			font-size: 18px;
+		}
+		.logs thead th {
+			position: sticky;
+			top: 0px;
+			height: 35px;
+			width: 10px;
+			color: white;
+			background-color: #FCB30E;
+			border-collapse: collapse;
+			font-size: 18px;
+		}
+		tr:nth-child(even) {
+			background-color: white;
+		}
+		.lbl {
 		background-color: transparent;
-		border: none;
-		width: 480px;
-		margin: 2%;
+		font-family: 'Glacial Indifference';
+		font-size: 15px;
+		width: 100%;
+		height: 25px;
+		text-align: center;
+		letter-spacing: 7px;
+		padding-top: 6px;
+		font-weight: bold;
+		}
+		.lbl label {
+		position: sticky;
+		top: 0;
+		}
+		.tbl {
+		width: 500px;
+		overflow-y: auto;
+		height: 355px;
 
 		}
-		.logs select {
-		background-color: transparent;
-		border: none;
-		width: 680px;
-		margin: 2%;
-		font-family: 'Georgia';
-		letter-spacing: 2px;
+		.tbl2 {
+		width: 700px;
+		overflow-y: auto;
+		height: 355px;
+
 		}
 	</style>
 <meta charset="utf-8">
@@ -240,27 +293,61 @@
   		<li style="float: right;"><a href="/logout"><i class='bx bxs-exit'></i> SIGN OUT</a></li>
 	</ul>
 	<div class="lblDiv">
-		<label>SUBJECT</label>
+		<label>CSC 0312.1</label>
 	</div>
 	<button type="submit" class="dlbtn"><a href="{{url_for('recog.download_csv')}}">DOWNLOAD</a></button>
 	<div class="myDiv">
-		<form method="POST"><button type="submit" class="dlbtn" method="POST">SHOW</button></form>
+		<form method="POST"><button type="submit" class="dlbtn" style="background-color: #3CB371;" method="POST">SHOW</button></form>
 	</div>
 
 	<div class="attendance">
-		<select name="class_list" id="class_list" size="21">
-			{% for i in attd %}
-				<option>{{i}}</option>
-			{% endfor %}
-		</select>
+		<div class="lbl">
+			<label>ATTENDANCE</label>
+		</div>
+		<div class="tbl">
+			<table>
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Time</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for x in range(at_len) %}
+					<tr>
+							<td>{{att_name[x]}}</td>
+							<td>{{att_time[x]}}</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+			</table>
+		</div>
 
 	</div>
 	<div class="logs">
-		<select name="class_list" id="class_list" size="21">
-			{% for i in lg %}
-				<option>{{i}}</option>
-			{% endfor %}
-		</select>
+		<div class="lbl">
+			<label>LOGS</label>
+		</div>
+		<div class="tbl2">
+			<table>
+					<thead>
+					<tr>
+						<th>Name</th>
+						<th>Time</th>
+						<th>Status</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for x in range(lg_len) %}
+					<tr>
+							<td>{{lgg_name[x]}}</td>
+							<td>{{lgg_time[x]}}</td>
+							<td>{{lgg_status[x]}}</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
