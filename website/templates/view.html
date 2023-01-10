@@ -152,6 +152,7 @@
 			animation-name: fade;
  			animation-duration: 1s; 
  			animation-fill-mode: forwards;
+ 			oveflow-y: auto;
 		}
 		
 		.logs {
@@ -165,6 +166,7 @@
 			animation-name: fade;
  			animation-duration: 1s; 
  			animation-fill-mode: forwards;
+ 			overflow-y: auto;
 		}
 		
 		.dlbtn{
@@ -212,20 +214,45 @@
             float: left;
             position: relative;
         }
-		.attendance select {
-		background-color: transparent;
-		border: none;
-		width: 480px;
-		margin: 2%;
-
+		a{
+			text-decoration: none;
+			color: white;
 		}
-		.logs select {
-		background-color: transparent;
-		border: none;
-		width: 680px;
-		margin: 2%;
-		font-family: 'Georgia';
-		letter-spacing: 2px;
+		.attendance table {
+			width: 500px;
+			font-family: 'Century Gothic';
+			text-align: center;
+			border-collapse:collapse;
+		}
+		.logs table {
+			width: 700px;
+			font-family: 'Century Gothic';
+			text-align: center;
+			border-collapse:collapse;
+		}
+
+		.attendance thead th {
+			position: sticky;
+			top: 0px;
+			height: 35px;
+			width: 10px;
+			color: white;
+			background-color: #FCB30E;
+			border-collapse: collapse;
+			font-size: 18px;
+		}
+		.logs thead th {
+			position: sticky;
+			top: 0px;
+			height: 35px;
+			width: 10px;
+			color: white;
+			background-color: #FCB30E;
+			border-collapse: collapse;
+			font-size: 18px;
+		}
+		tr:nth-child(even) {
+			background-color: white;
 		}
 	</style>
 <meta charset="utf-8">
@@ -244,7 +271,7 @@
 	</div>
 	<button type="submit" class="dlbtn"><a href="{{url_for('recog.download_csv')}}">DOWNLOAD</a></button>
 	<div class="myDiv">
-		<form method="POST"><button type="submit" class="dlbtn" method="POST">SHOW</button></form>
+		<form method="POST"><button type="submit" class="dlbtn" style="background-color: #3CB371;" method="POST">SHOW</button></form>
 	</div>
 
 	<div class="attendance">

@@ -91,8 +91,9 @@
 			border-style: solid;
 			float: right;
 			width: 350px;
-			height: 500px;
+			height: 450px;
 			margin: 2.3%;
+			margin-top: 60px;
 			animation-name: fade;
  			animation-duration: 1s; 
  			animation-fill-mode: forwards;
@@ -117,15 +118,22 @@
         </div>
     </div>
 	<div class="attendance" method="POST">
-
-<!--		<table>-->
-<!--			<h1>-->
-<!--				{% for table in tables %}-->
-<!--					<h2>{{titles}}</h2>-->
-<!--				{{table | safe}}-->
-<!--				{% endfor %}-->
-<!--			</h1>-->
-<!--		</table>-->
+		<table>
+				<thead>
+				<tr>
+					<th>Name</th>
+					<th>Time</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for x in range(at_len) %}
+                <tr>
+                        <td>{{att_name[x]}}</td>
+                        <td>{{att_time[x]}}</td>
+                </tr>
+                {% endfor %}
+				</tbody>
+		</table>
 
 	</div>
 </body>

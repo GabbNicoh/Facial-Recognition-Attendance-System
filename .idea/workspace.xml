@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/attendance.csv" beforeDir="false" afterPath="$PROJECT_DIR$/website/attendance.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/logging.csv" beforeDir="false" afterPath="$PROJECT_DIR$/website/logging.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/recog.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/recog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/templates/face-recog.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/face-recog.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/templates/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/view.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
